@@ -865,6 +865,49 @@
       gap: 8px;
     }
     
+    /* ==================== INTERACTIVE STEPS ==================== */
+.step {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.step:hover .step-number {
+  transform: scale(1.1);
+}
+
+.step.clickable {
+  cursor: pointer;
+}
+
+.step.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkout-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.checkout-card.hidden {
+  display: none !important;
+}
+
+/* Navigation Buttons */
+.step-navigation {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: var(--radius);
+}
+
+.step-navigation .btn {
+  flex: 1;
+}
+
+
     /* ==================== LOADING & TOASTS ==================== */
     .spinner {
       width: 18px;
@@ -1213,6 +1256,16 @@
                 Continue as Guest
               </button>
             </div>
+            
+            <div class="step-navigation" id="step1Navigation">
+              <button class="btn btn-primary btn-block" onclick="goToStep(2)">
+                Continue to Delivery
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+            
+
 
             <!-- ✅ POS Customer Info - يظهر في حالة POS فقط -->
             <div id="posCustomerSection" class="checkout-card hidden" style="margin-top: 16px;">
@@ -1236,7 +1289,6 @@
             </div>
 
 
-            
             <!-- Guest Details Section -->
             <div class="checkout-card hidden" id="guestDetailsSection">
               <h3 class="section-title">
@@ -1337,6 +1389,18 @@
               </div>
             </div>
             
+
+            <div class="step-navigation" id="step2Navigation">
+            <button class="btn btn-outline" onclick="goToStep(1)">
+              <i class="fa-solid fa-arrow-left"></i>
+              Back to Customer
+            </button>
+            <button class="btn btn-primary" onclick="goToStep(3)">
+              Continue to Payment
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            </div>
+
             <!-- Payment Section -->
             <div class="checkout-card" id="paymentSection">
               <h3 class="section-title">
@@ -1352,6 +1416,14 @@
                 </select>
               </div>
             </div>
+            
+            <div class="step-navigation" id="step3Navigation">
+              <button class="btn btn-outline" onclick="goToStep(2)">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Delivery
+              </button>
+            </div>
+
           </div>
           
           <!-- Sidebar: Order Summary -->
@@ -1447,8 +1519,10 @@
       discount: 0,
       defaultOrderStatus: 'on-hold',
       orderStatuses: [],
-      paymentGateways: [] 
+      paymentGateways: [],
+      currentStep: 1  
     };
+
 
     // ==================== HELPERS ====================
     const $ = id => document.getElementById(id);
@@ -2008,6 +2082,107 @@ async function loadPaymentGateways() {
 
       return { subtotal, discount, subtotalAfterDiscount, shipping, total };
     }
+
+    // ==================== STEP NAVIGATION FUNCTIONS ====================
+function goToStep(stepNumber) {
+  if (stepNumber < 1 || stepNumber > 3) return;
+  
+  // Validate current step before moving forward
+  if (stepNumber > state.currentStep) {
+    if (state.currentStep === 1 && !validateStep1()) return;
+    if (state.currentStep === 2 && !validateStep2()) return;
+  }
+  
+  state.currentStep = stepNumber;
+  updateStepUI();
+  updateSectionVisibility();
+}
+
+function validateStep1() {
+  if (!state.selectedCustomer) {
+    showToast('Please select a customer or continue as guest', 'warning');
+    $('customerSearchInput').focus();
+    return false;
+  }
+  return true;
+}
+
+function validateStep2() {
+  if (!state.orderType) {
+    showToast('Please select order type (POS or Delivery)', 'warning');
+    return false;
+  }
+  
+  if (state.orderType === 'delivery') {
+    const isGuest = state.selectedCustomer && state.selectedCustomer.id === 0;
+    
+    if (isGuest) {
+      const guestZone = $('guestZoneSelect').value;
+      if (!guestZone) {
+        showToast('Please select delivery zone', 'warning');
+        return false;
+      }
+    } else {
+      if (!state.selectedAddress) {
+        showToast('Please select delivery address', 'warning');
+        return false;
+      }
+    }
+    
+    const deliveryDate = $('deliveryDateSelect').value;
+    const deliveryTime = $('deliveryTimeSelect').value;
+    
+    if (!deliveryDate || !deliveryTime) {
+      showToast('Please select delivery date and time', 'warning');
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+function updateStepUI() {
+  // Update step indicators
+  for (let i = 1; i <= 3; i++) {
+    const stepElement = $(`step${i}`);
+    stepElement.classList.remove('active', 'completed');
+    
+    if (i < state.currentStep) {
+      stepElement.classList.add('completed');
+    } else if (i === state.currentStep) {
+      stepElement.classList.add('active');
+    }
+  }
+}
+
+function updateSectionVisibility() {
+  const customerSection = $('customerSection');
+  const deliverySection = $('deliverySection');
+  const paymentSection = $('paymentSection');
+  
+  // Hide all sections first
+  [customerSection, deliverySection, paymentSection].forEach(section => {
+    if (section) section.classList.add('hidden');
+  });
+  
+  // Show current step section
+  switch (state.currentStep) {
+    case 1:
+      if (customerSection) customerSection.classList.remove('hidden');
+      break;
+    case 2:
+      if (deliverySection) deliverySection.classList.remove('hidden');
+      break;
+    case 3:
+      if (paymentSection) paymentSection.classList.remove('hidden');
+      break;
+  }
+  
+  // Scroll to top of checkout main
+  const checkoutMain = document.querySelector('.checkout-main');
+  if (checkoutMain) checkoutMain.scrollTop = 0;
+}
+
 
     // ==================== PRODUCT FILTERING ====================
     function getFilteredProducts() {
@@ -2642,25 +2817,24 @@ async function loadPaymentGateways() {
         return;
       }
 
+      // ✅ Reset to step 1
+      state.currentStep = 1;
+
       const totals = calculateCartTotals();
       updateCartLabels(totals.subtotal, totals.discount, totals.subtotalAfterDiscount, totals.shipping, totals.total);
 
       renderCouponSection();
       renderCheckoutCartItems();
-      renderPaymentMethods();  
+      renderPaymentMethods();
 
-
-      $('deliverySection').classList.remove('hidden');
-
-      const deliveryAddressSection = $('deliveryAddressSection');
-      if (state.orderType === 'delivery') {
-        deliveryAddressSection.classList.remove('hidden');
-      } else {
-        deliveryAddressSection.classList.add('hidden');
-      }
+      // ✅ Initialize step UI
+      updateStepUI();
+      updateSectionVisibility();
 
       showScreen('screen-checkout');
     }
+
+
 
     function handleBackToPos() {
       showScreen('screen-pos');
@@ -3209,6 +3383,15 @@ if (isGuest && state.orderType === 'delivery') {
       $('mobileCloseCart').onclick = () => {
         $('cartPanel').classList.remove('open');
       };
+
+        // Step indicators click handlers
+        for (let i = 1; i <= 3; i++) {
+          const stepElement = $(`step${i}`);
+          if (stepElement) {
+            stepElement.onclick = () => goToStep(i);
+          }
+        }
+
     }
 
     // ==================== INITIALIZATION ====================
