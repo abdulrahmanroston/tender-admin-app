@@ -6,74 +6,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- Navigation CSS -->
-    <link rel="stylesheet" href="navigation.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="theme-color" content="#1a73e8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="navigation.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#1a73e8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ==================== CSS RESET & VARIABLES ==================== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
     :root {
-      --primary: #1a73e8;
-      --primary-dark: #1557b0;
-      --primary-light: #e8f0fe;
-      --success: #34a853;
-      --success-light: #e6f4ea;
-      --danger: #ea4335;
-      --danger-light: #fce8e6;
-      --warning: #fbbc04;
-      --warning-light: #fef7e0;
-      --info: #4285f4;
-      
-      --dark: #202124;
-      --gray-900: #3c4043;
-      --gray-700: #5f6368;
-      --gray-500: #80868b;
-      --gray-300: #dadce0;
-      --gray-100: #f1f3f4;
-      --gray-50: #f8f9fa;
-      --white: #ffffff;
-      
+      --primary: #1a73e8; --primary-dark: #1557b0; --primary-light: #e8f0fe;
+      --success: #34a853; --success-light: #e6f4ea; --danger: #ea4335; --danger-light: #fce8e6;
+      --warning: #fbbc04; --warning-light: #fef7e0; --info: #4285f4;
+      --dark: #202124; --gray-900: #3c4043; --gray-700: #5f6368; --gray-500: #80868b;
+      --gray-300: #dadce0; --gray-100: #f1f3f4; --gray-50: #f8f9fa; --white: #ffffff;
       --shadow-sm: 0 1px 2px rgba(60,64,67,0.1);
       --shadow: 0 1px 3px rgba(60,64,67,0.15), 0 1px 2px rgba(60,64,67,0.1);
       --shadow-md: 0 4px 6px rgba(60,64,67,0.1), 0 2px 4px rgba(60,64,67,0.06);
       --shadow-lg: 0 10px 25px rgba(60,64,67,0.15);
-      
-      --radius-sm: 6px;
-      --radius: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-full: 999px;
-      
+      --radius-sm: 6px; --radius: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-full: 999px;
       --transition: 0.15s ease;
     }
-    
-    html, body {
-      height: 100%;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 14px;
-      color: var(--dark);
-      background: var(--gray-100);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      overflow: hidden;
-    }
-    
-    /* ==================== SCROLLBAR ==================== */
+    html, body { height: 100%; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: var(--dark); background: var(--gray-100); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow: hidden; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: var(--radius-full); }
     ::-webkit-scrollbar-thumb:hover { background: var(--gray-500); }
-    
-    /* ==================== UTILITIES ==================== */
     .hidden { display: none !important; }
     .text-center { text-align: center; }
     .text-primary { color: var(--primary); }
@@ -83,1597 +43,388 @@
     .mt-sm { margin-top: 8px; }
     .mt-md { margin-top: 16px; }
     .mb-md { margin-bottom: 16px; }
-    
-    /* ==================== BUTTONS ==================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 16px;
-      border-radius: var(--radius);
-      border: none;
-      font-size: 13px;
-      font-weight: 600;
-      min-height: 40px;
-      cursor: pointer;
-      transition: var(--transition);
-      white-space: nowrap;
-      font-family: inherit;
-    }
-    
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: var(--radius); border: none; font-size: 13px; font-weight: 600; min-height: 40px; cursor: pointer; transition: var(--transition); white-space: nowrap; font-family: inherit; }
     .btn-sm { padding: 6px 12px; min-height: 32px; font-size: 12px; }
     .btn-lg { padding: 14px 24px; min-height: 48px; font-size: 15px; }
     .btn-block { width: 100%; }
-    
     .btn-primary { background: var(--primary); color: var(--white); }
     .btn-primary:hover { background: var(--primary-dark); }
-    
     .btn-success { background: var(--success); color: var(--white); }
     .btn-success:hover { background: #2d9249; }
-    
     .btn-danger { background: var(--danger); color: var(--white); }
     .btn-danger:hover { background: #d33426; }
-    
-    .btn-outline {
-      background: var(--white);
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-    }
+    .btn-outline { background: var(--white); color: var(--primary); border: 1.5px solid var(--primary); }
     .btn-outline:hover { background: var(--primary-light); }
-    
     .btn-ghost { background: transparent; color: var(--gray-700); }
     .btn-ghost:hover { background: var(--gray-100); }
-    
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    
-    /* ==================== FORMS ==================== */
     .form-group { margin-bottom: 16px; }
     .form-label { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--gray-700); }
-    
-    .form-control, .select-control {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: var(--radius);
-      border: 1.5px solid var(--gray-300);
-      background: var(--white);
-      font-size: 14px;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-    
-    .form-control:focus, .select-control:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 3px var(--primary-light);
-    }
-    
+    .form-control, .select-control { width: 100%; padding: 10px 12px; border-radius: var(--radius); border: 1.5px solid var(--gray-300); background: var(--white); font-size: 14px; font-family: inherit; transition: var(--transition); }
+    .form-control:focus, .select-control:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px var(--primary-light); }
     .input-with-icon { position: relative; }
     .input-with-icon i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-500); font-size: 14px; }
     .input-with-icon input { padding-left: 38px; }
-    
     textarea.form-control { resize: vertical; min-height: 80px; }
-    
-    /* ==================== CARD ==================== */
-    .card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: var(--shadow-lg);
-    }
-    
+    .card { background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-lg); }
     .card-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
     .card-subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; }
-    
-    /* ==================== APP LAYOUT ==================== */
     #app { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-    
     .screen { display: none; flex: 1; overflow: hidden; }
     .screen.active { display: flex; }
-    
-    .screen-center {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    }
-    
+    .screen-center { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); }
     .screen-center .card { width: 100%; max-width: 400px; }
-    
-    /* ==================== HEADER ==================== */
-    .app-header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: var(--white);
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow-md);
-      z-index: 100;
-      flex-shrink: 0;
-    }
-    
+    .app-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); z-index: 100; flex-shrink: 0; }
     .app-header-left { display: flex; align-items: center; gap: 12px; }
-    
-    .app-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-    
+    .app-logo { width: 40px; height: 40px; border-radius: var(--radius); background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; }
     .app-title { font-size: 16px; font-weight: 700; }
     .app-subtitle { font-size: 11px; opacity: 0.9; }
-    
     .app-header-right { display: flex; align-items: center; gap: 8px; }
-    
-    .badge {
-      padding: 6px 12px;
-      border-radius: var(--radius-full);
-      background: rgba(255,255,255,0.15);
-      font-size: 12px;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .header-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.15);
-      border: none;
-      color: var(--white);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
+    .badge { padding: 6px 12px; border-radius: var(--radius-full); background: rgba(255,255,255,0.15); font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+    .header-btn { width: 36px; height: 36px; border-radius: var(--radius); background: rgba(255,255,255,0.15); border: none; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
     .header-btn:hover { background: rgba(255,255,255,0.25); }
-    
-    /* ==================== WAREHOUSE SELECTOR ==================== */
-    .warehouse-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 350px;
-      overflow-y: auto;
-    }
-    
-    .warehouse-item {
-      padding: 14px;
-      border-radius: var(--radius);
-      background: var(--gray-50);
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
-    }
+    .warehouse-list { display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto; }
+    .warehouse-item { padding: 14px; border-radius: var(--radius); background: var(--gray-50); border: 2px solid transparent; cursor: pointer; transition: var(--transition); }
     .warehouse-item:hover { border-color: var(--primary); background: var(--primary-light); }
     .warehouse-item.selected { border-color: var(--primary); background: var(--primary-light); }
-    
     .warehouse-name { font-weight: 600; font-size: 14px; }
     .warehouse-meta { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
-    
-    /* ==================== POS LAYOUT ==================== */
-    .pos-container {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 0;
-      overflow: hidden;
-    }
-    
-    /* LEFT: Products */
-    .pos-left {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      background: var(--gray-100);
-    }
-    
-    .pos-toolbar {
-      padding: 12px 16px;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-300);
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    
-    .pos-search {
-      flex: 1;
-      position: relative;
-    }
-    
-    .pos-search i {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray-500);
-    }
-    
-    .pos-search input {
-      width: 100%;
-      padding: 10px 12px 10px 38px;
-      border-radius: var(--radius-full);
-      border: 1.5px solid var(--gray-300);
-      background: var(--gray-50);
-      font-size: 13px;
-    }
-    .pos-search input:focus {
-      background: var(--white);
-      border-color: var(--primary);
-      outline: none;
-    }
-    
-    /* Category Filter */
-    .category-bar {
-      padding: 8px 16px;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-300);
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      flex-shrink: 0;
-      -webkit-overflow-scrolling: touch;
-    }
+    .pos-container { flex: 1; display: grid; grid-template-columns: 1fr 380px; gap: 0; overflow: hidden; }
+    .pos-left { display: flex; flex-direction: column; overflow: hidden; background: var(--gray-100); }
+    .pos-toolbar { padding: 12px 16px; background: var(--white); border-bottom: 1px solid var(--gray-300); display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
+    .pos-search { flex: 1; position: relative; }
+    .pos-search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-500); }
+    .pos-search input { width: 100%; padding: 10px 12px 10px 38px; border-radius: var(--radius-full); border: 1.5px solid var(--gray-300); background: var(--gray-50); font-size: 13px; }
+    .pos-search input:focus { background: var(--white); border-color: var(--primary); outline: none; }
+    .category-bar { padding: 8px 16px; background: var(--white); border-bottom: 1px solid var(--gray-300); display: flex; gap: 8px; overflow-x: auto; flex-shrink: 0; -webkit-overflow-scrolling: touch; }
     .category-bar::-webkit-scrollbar { height: 0; }
-    
-    .chip {
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      background: var(--gray-50);
-      border: 1.5px solid var(--gray-300);
-      font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: var(--transition);
-    }
+    .chip { padding: 6px 14px; border-radius: var(--radius-full); background: var(--gray-50); border: 1.5px solid var(--gray-300); font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: var(--transition); }
     .chip:hover { border-color: var(--primary); }
     .chip.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
-    
-    /* Products Grid */
-    .products-area {
-      flex: 1;
-      padding: 12px 16px;
-      overflow-y: auto;
-    }
-    
-    .products-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    
+    .products-area { flex: 1; padding: 12px 16px; overflow-y: auto; }
+    .products-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .products-title { font-size: 15px; font-weight: 700; }
     .products-count { font-size: 12px; color: var(--gray-500); }
-    
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-    }
-    
-    .product-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 10px;
-      cursor: pointer;
-      transition: var(--transition);
-      border: 2px solid transparent;
-      position: relative;
-    }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .product-card { background: var(--white); border-radius: var(--radius-md); padding: 10px; cursor: pointer; transition: var(--transition); border: 2px solid transparent; position: relative; }
     .product-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
     .product-card:active { transform: translateY(0); }
-    
-    .product-stock-badge {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: var(--success-light);
-      color: var(--success);
-      font-size: 10px;
-      font-weight: 700;
-    }
+    .product-stock-badge { position: absolute; top: 6px; right: 6px; padding: 2px 8px; border-radius: var(--radius-full); background: var(--success-light); color: var(--success); font-size: 10px; font-weight: 700; }
     .product-stock-badge.low { background: var(--warning-light); color: #b45309; }
     .product-stock-badge.out { background: var(--danger-light); color: var(--danger); }
-    
-    .product-image {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: var(--radius);
-      background: var(--gray-50);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+    .product-image { width: 100%; aspect-ratio: 1; border-radius: var(--radius); background: var(--gray-50); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .product-image img { width: 100%; height: 100%; object-fit: cover; }
     .product-image i { font-size: 24px; color: var(--gray-300); }
-    
     .product-name { font-size: 12px; font-weight: 600; line-height: 1.3; margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .product-category { font-size: 10px; color: var(--gray-500); margin-bottom: 4px; }
     .product-price { font-size: 13px; font-weight: 700; color: var(--primary); }
-    
-    /* ==================== RIGHT: Cart ==================== */
-    .pos-right {
-      display: flex;
-      flex-direction: column;
-      background: var(--white);
-      border-left: 1px solid var(--gray-300);
-      overflow: hidden;
-    }
-    
-    .cart-header {
-      padding: 16px;
-      border-bottom: 1px solid var(--gray-300);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    
+    .pos-right { display: flex; flex-direction: column; background: var(--white); border-left: 1px solid var(--gray-300); overflow: hidden; }
+    .cart-header { padding: 16px; border-bottom: 1px solid var(--gray-300); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
     .cart-title { font-size: 16px; font-weight: 700; }
     .cart-count { font-size: 12px; color: var(--gray-500); }
-    
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 8px 16px;
-    }
-    
-    .cart-empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--gray-500);
-    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 8px 16px; }
+    .cart-empty { text-align: center; padding: 40px 20px; color: var(--gray-500); }
     .cart-empty i { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
     .cart-empty p { font-size: 13px; }
-    
-    .cart-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--gray-100);
-    }
+    .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
     .cart-item:last-child { border-bottom: none; }
-    
     .cart-item-info { flex: 1; min-width: 0; }
     .cart-item-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .cart-item-price { font-size: 11px; color: var(--gray-500); }
-    
-    .cart-item-qty {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    
-    .qty-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-full);
-      background: var(--gray-100);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      transition: var(--transition);
-    }
+    .cart-item-qty { display: flex; align-items: center; gap: 6px; }
+    .qty-btn { width: 28px; height: 28px; border-radius: var(--radius-full); background: var(--gray-100); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: var(--transition); }
     .qty-btn:hover { background: var(--primary); color: var(--white); }
-    
     .cart-item-total { font-size: 13px; font-weight: 700; color: var(--primary); min-width: 70px; text-align: right; }
-    
-    .cart-item-remove {
-      color: var(--danger);
-      cursor: pointer;
-      padding: 4px;
-      opacity: 0.6;
-      transition: var(--transition);
-    }
+    .cart-item-remove { color: var(--danger); cursor: pointer; padding: 4px; opacity: 0.6; transition: var(--transition); }
     .cart-item-remove:hover { opacity: 1; }
-    
-    /* Cart Summary */
-    .cart-summary {
-      padding: 16px;
-      border-top: 2px solid var(--gray-100);
-      flex-shrink: 0;
-    }
-    
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 13px;
-    }
+    .cart-summary { padding: 16px; border-top: 2px solid var(--gray-100); flex-shrink: 0; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
     .summary-row span:first-child { color: var(--gray-500); }
-    
-    .summary-total {
-      display: flex;
-      justify-content: space-between;
-      padding-top: 12px;
-      border-top: 2px solid var(--gray-100);
-      margin-top: 8px;
-    }
+    .summary-total { display: flex; justify-content: space-between; padding-top: 12px; border-top: 2px solid var(--gray-100); margin-top: 8px; }
     .summary-total span:first-child { font-size: 14px; font-weight: 600; }
     .summary-total span:last-child { font-size: 20px; font-weight: 700; color: var(--primary); }
-    
-    /* Cart Actions */
-    .cart-actions {
-      padding: 16px;
-      border-top: 1px solid var(--gray-300);
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-    
+    .cart-actions { padding: 16px; border-top: 1px solid var(--gray-300); display: flex; gap: 8px; flex-shrink: 0; }
     .cart-actions .btn { flex: 1; }
-    
-    /* ==================== CHECKOUT SCREEN ==================== */
-    .checkout-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    
-    .checkout-header {
-      padding: 16px 20px;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-300);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
-    }
-    
+    .checkout-container { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .checkout-header { padding: 16px 20px; background: var(--white); border-bottom: 1px solid var(--gray-300); display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
     .checkout-title { font-size: 18px; font-weight: 700; flex: 1; }
-    
-    /* Steps */
-    .checkout-steps {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px;
-      background: var(--gray-50);
-      border-bottom: 1px solid var(--gray-300);
-      flex-shrink: 0;
-    }
-    
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .step-number {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-full);
-      background: var(--gray-300);
-      color: var(--gray-700);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      transition: var(--transition);
-    }
-    
-    .step.active .step-number, .step.completed .step-number {
-      background: var(--primary);
-      color: var(--white);
-    }
-    
+    .checkout-steps { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: var(--gray-50); border-bottom: 1px solid var(--gray-300); flex-shrink: 0; }
+    .step { display: flex; align-items: center; gap: 8px; cursor: pointer; transition: var(--transition); }
+    .step-number { width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--gray-300); color: var(--gray-700); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; transition: var(--transition); }
+    .step.active .step-number, .step.completed .step-number { background: var(--primary); color: var(--white); }
     .step-label { font-size: 12px; font-weight: 600; color: var(--gray-500); }
     .step.active .step-label { color: var(--primary); }
-    
     .step-line { width: 40px; height: 2px; background: var(--gray-300); }
     .step.completed + .step-line { background: var(--primary); }
-    
-    /* Checkout Content */
-    .checkout-body {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 0;
-      overflow: hidden;
-    }
-    
-    .checkout-main {
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .checkout-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .checkout-body { flex: 1; display: grid; grid-template-columns: 1fr 360px; gap: 0; overflow: hidden; }
+    .checkout-main { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+    .checkout-card { background: var(--white); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); }
+    .section-title { font-size: 15px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .section-title i { color: var(--primary); }
-    
-    /* Customer Search Results */
-    .search-results {
-      max-height: 200px;
-      overflow-y: auto;
-      border: 1px solid var(--gray-300);
-      border-radius: var(--radius);
-      margin-top: 8px;
-    }
-    
-    .customer-result {
-      padding: 10px 12px;
-      cursor: pointer;
-      border-bottom: 1px solid var(--gray-100);
-      transition: var(--transition);
-    }
+    .search-results { max-height: 200px; overflow-y: auto; border: 1px solid var(--gray-300); border-radius: var(--radius); margin-top: 8px; }
+    .customer-result { padding: 10px 12px; cursor: pointer; border-bottom: 1px solid var(--gray-100); transition: var(--transition); }
     .customer-result:hover { background: var(--gray-50); }
     .customer-result:last-child { border-bottom: none; }
-    
     .customer-name { font-weight: 600; font-size: 13px; }
     .customer-meta { font-size: 11px; color: var(--gray-500); }
-    
-    /* Selected Info */
-    .selected-badge {
-      padding: 10px 12px;
-      background: var(--success-light);
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--success);
-      font-weight: 600;
-      font-size: 13px;
-      margin: 12px 0;
-    }
-    
-    /* Radio Chips */
+    .selected-badge { padding: 10px 12px; background: var(--success-light); border-radius: var(--radius); display: flex; align-items: center; gap: 8px; color: var(--success); font-weight: 600; font-size: 13px; margin: 12px 0; }
     .radio-group { display: flex; gap: 8px; flex-wrap: wrap; }
-    
-    .radio-chip {
-      padding: 10px 16px;
-      border-radius: var(--radius-full);
-      border: 2px solid var(--gray-300);
-      background: var(--white);
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .radio-chip { padding: 10px 16px; border-radius: var(--radius-full); border: 2px solid var(--gray-300); background: var(--white); cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
     .radio-chip:hover { border-color: var(--primary); }
     .radio-chip.active { border-color: var(--primary); background: var(--primary); color: var(--white); }
-    
-    /* Address List */
-    .address-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 250px;
-      overflow-y: auto;
-      margin-bottom: 12px;
-    }
-    
-    .address-item {
-      padding: 12px;
-      background: var(--gray-50);
-      border-radius: var(--radius);
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
-      position: relative;
-    }
+    .address-list { display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; margin-bottom: 12px; }
+    .address-item { padding: 12px; background: var(--gray-50); border-radius: var(--radius); border: 2px solid transparent; cursor: pointer; transition: var(--transition); position: relative; }
     .address-item:hover { border-color: var(--primary); }
     .address-item.active { border-color: var(--primary); background: var(--primary-light); }
-    
-    .address-item.active::after {
-      content: '\f00c';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 22px;
-      height: 22px;
-      background: var(--primary);
-      color: var(--white);
-      border-radius: var(--radius-full);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-    }
-    
+    .address-item.active::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; background: var(--primary); color: var(--white); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: 10px; }
     .address-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
     .address-details { font-size: 12px; color: var(--gray-500); line-height: 1.4; }
-    
-    /* Schedule Grid */
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    
-    /* Checkout Sidebar */
-    .checkout-sidebar {
-      background: var(--gray-50);
-      border-left: 1px solid var(--gray-300);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-    
-    .summary-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .summary-items {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 16px;
-      max-height: 250px;
-    }
-    
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      font-size: 12px;
-      border-bottom: 1px dashed var(--gray-100);
-    }
+    .schedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .checkout-sidebar { background: var(--gray-50); border-left: 1px solid var(--gray-300); padding: 20px; display: flex; flex-direction: column; overflow-y: auto; }
+    .summary-card { background: var(--white); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); flex: 1; display: flex; flex-direction: column; }
+    .summary-items { flex: 1; overflow-y: auto; margin-bottom: 16px; max-height: 250px; }
+    .summary-item { display: flex; justify-content: space-between; padding: 8px 0; font-size: 12px; border-bottom: 1px dashed var(--gray-100); }
     .summary-item:last-child { border-bottom: none; }
-    
     .summary-item-name { font-weight: 500; }
     .summary-item-qty { color: var(--gray-500); margin-left: 4px; }
-    
     .summary-totals { padding-top: 16px; border-top: 2px solid var(--gray-100); margin-bottom: 16px; }
-    
     .summary-totals .summary-row { margin-bottom: 8px; }
     .summary-totals .summary-row.total { font-size: 18px; font-weight: 700; color: var(--primary); margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--gray-100); }
-    
-    /* Coupon Section */
-    .coupon-section {
-      padding: 12px;
-      background: var(--gray-50);
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-    }
-    
-    .coupon-input-group {
-      display: flex;
-      gap: 8px;
-    }
-    
+    .coupon-section { padding: 12px; background: var(--gray-50); border-radius: var(--radius); margin-bottom: 16px; }
+    .coupon-input-group { display: flex; gap: 8px; }
     .coupon-input-group input { flex: 1; }
-    
-    .coupon-applied {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      background: var(--success-light);
-      border-radius: var(--radius);
-      color: var(--success);
-      font-weight: 600;
-      font-size: 13px;
-    }
-    
-    /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--gray-500);
-    }
+    .coupon-applied { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--success-light); border-radius: var(--radius); color: var(--success); font-weight: 600; font-size: 13px; }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--gray-500); }
     .empty-state i { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
-    
-    /* ==================== MODALS ==================== */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      padding: 20px;
-    }
-    
-    .modal {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .modal-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--gray-300);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+    .modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 500px; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); }
+    .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-300); display: flex; justify-content: space-between; align-items: center; }
     .modal-title { font-size: 16px; font-weight: 700; }
-    
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-full);
-      background: var(--gray-100);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
+    .modal-close { width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--gray-100); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
     .modal-close:hover { background: var(--danger); color: var(--white); }
-    
     .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
-    
-    .modal-footer {
-      padding: 16px 20px;
-      border-top: 1px solid var(--gray-300);
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-    
-    /* ==================== LOADING & TOASTS ==================== */
-    .spinner {
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top-color: currentColor;
-      animation: spin 0.6s linear infinite;
-    }
-    
+    .modal-footer { padding: 16px 20px; border-top: 1px solid var(--gray-300); display: flex; justify-content: flex-end; gap: 8px; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.6s linear infinite; }
     .spinner-lg { width: 40px; height: 40px; border-width: 3px; }
-    
     @keyframes spin { to { transform: rotate(360deg); } }
-    
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 300;
-    }
-    
-    .toast-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 400;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    
-    .toast {
-      background: var(--white);
-      padding: 12px 16px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 280px;
-      border-left: 4px solid var(--primary);
-      animation: slideIn 0.3s ease;
-    }
-    
+    .loading-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 300; }
+    .toast-container { position: fixed; top: 20px; right: 20px; z-index: 400; display: flex; flex-direction: column; gap: 8px; }
+    .toast { background: var(--white); padding: 12px 16px; border-radius: var(--radius); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; min-width: 280px; border-left: 4px solid var(--primary); animation: slideIn 0.3s ease; }
     .toast.success { border-left-color: var(--success); }
     .toast.error { border-left-color: var(--danger); }
     .toast.warning { border-left-color: var(--warning); }
-    
     .toast-message { flex: 1; font-size: 13px; }
     .toast-close { background: none; border: none; cursor: pointer; color: var(--gray-500); padding: 4px; }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    /* ==================== RESPONSIVE ==================== */
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @media (max-width: 1024px) {
       .pos-container { grid-template-columns: 1fr; }
       .pos-right { display: none; position: fixed; inset: 0; z-index: 150; }
       .pos-right.open { display: flex; }
-      
       .checkout-body { grid-template-columns: 1fr; }
       .checkout-sidebar { border-left: none; border-top: 1px solid var(--gray-300); }
     }
-    
     @media (max-width: 768px) {
       .app-header { padding: 10px 12px; }
       .app-title { font-size: 14px; }
       .app-subtitle { display: none; }
       .badge span { display: none; }
-      
       .pos-toolbar { padding: 10px 12px; }
       .category-bar { padding: 8px 12px; }
       .products-area { padding: 10px 12px; }
-      
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .product-card { padding: 8px; }
       .product-name { font-size: 11px; }
       .product-price { font-size: 12px; }
-      
       .checkout-main { padding: 12px; }
       .checkout-card { padding: 16px; }
       .checkout-sidebar { padding: 12px; }
-      
       .checkout-steps { gap: 4px; padding: 12px; }
       .step-label { display: none; }
       .step-line { width: 24px; }
-      
       .schedule-grid { grid-template-columns: 1fr; }
     }
-    
-    /* Mobile Cart Toggle */
-    .mobile-cart-toggle {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: var(--radius-full);
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: var(--shadow-lg);
-      border: none;
-      cursor: pointer;
-      z-index: 100;
-      font-size: 20px;
-    }
-    
-    .mobile-cart-toggle .cart-badge {
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      width: 22px;
-      height: 22px;
-      border-radius: var(--radius-full);
-      background: var(--danger);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    @media (max-width: 1024px) {
-      .mobile-cart-toggle { display: flex; align-items: center; justify-content: center; }
-    }
-
-    /* ✅ Step Navigation Buttons */
-    .step-nav-buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--gray-200);
-    }
+    .mobile-cart-toggle { display: none; position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: var(--radius-full); background: var(--primary); color: var(--white); box-shadow: var(--shadow-lg); border: none; cursor: pointer; z-index: 100; font-size: 20px; }
+    .mobile-cart-toggle .cart-badge { position: absolute; top: -4px; right: -4px; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--danger); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 1024px) { .mobile-cart-toggle { display: flex; align-items: center; justify-content: center; } }
+    .step-nav-buttons { display: flex; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gray-200); }
   </style>
 </head>
-
 <body>
   <div id="app">
-    <!-- Header -->
     <header class="app-header">
       <div class="app-header-left">
-        <div class="app-logo">
-          <i class="fa-solid fa-cash-register"></i>
-        </div>
+        <div class="app-logo"><i class="fa-solid fa-cash-register"></i></div>
         <div>
           <div class="app-title">Tender POS</div>
           <div class="app-subtitle">Point of Sale System</div>
         </div>
       </div>
       <div class="app-header-right">
-        <div class="badge" id="employeeBadge">
-          <i class="fa-solid fa-user"></i>
-          <span id="employeeName">Not signed in</span>
-        </div>
-        <div class="badge" id="warehouseBadge">
-          <i class="fa-solid fa-warehouse"></i>
-          <span id="warehouseName">No warehouse</span>
-        </div>
-        <button id="settingsBtn" class="header-btn hidden" title="Settings">
-          <i class="fa-solid fa-gear"></i>
-        </button>
-        <button id="logoutBtn" class="header-btn hidden" title="Logout">
-          <i class="fa-solid fa-right-from-bracket"></i>
-        </button>
+        <div class="badge" id="employeeBadge"><i class="fa-solid fa-user"></i><span id="employeeName">Not signed in</span></div>
+        <div class="badge" id="warehouseBadge"><i class="fa-solid fa-warehouse"></i><span id="warehouseName">No warehouse</span></div>
+        <button id="settingsBtn" class="header-btn hidden" title="Settings"><i class="fa-solid fa-gear"></i></button>
+        <button id="logoutBtn" class="header-btn hidden" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
       </div>
     </header>
 
-    <!-- Screen: Login -->
     <section id="screen-login" class="screen active">
       <div class="screen-center">
         <div class="card">
           <div class="card-title">Sign in to POS</div>
           <div class="card-subtitle">Use your staff phone and password (SHRMS).</div>
-          
           <div class="form-group">
             <label class="form-label">Phone</label>
-            <div class="input-with-icon">
-              <i class="fa-solid fa-phone"></i>
-              <input id="loginPhone" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX">
-            </div>
+            <div class="input-with-icon"><i class="fa-solid fa-phone"></i><input id="loginPhone" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX"></div>
           </div>
-          
           <div class="form-group">
             <label class="form-label">Password</label>
-            <div class="input-with-icon">
-              <i class="fa-solid fa-lock"></i>
-              <input id="loginPassword" type="password" class="form-control" placeholder="Enter password">
-            </div>
+            <div class="input-with-icon"><i class="fa-solid fa-lock"></i><input id="loginPassword" type="password" class="form-control" placeholder="Enter password"></div>
           </div>
-          
-          <button id="loginBtn" class="btn btn-primary btn-block btn-lg">
-            <span>Sign in</span>
-            <span id="loginSpinner" class="spinner hidden"></span>
-          </button>
+          <button id="loginBtn" class="btn btn-primary btn-block btn-lg"><span>Sign in</span><span id="loginSpinner" class="spinner hidden"></span></button>
         </div>
       </div>
     </section>
 
-    <!-- Screen: Warehouse Select -->
     <section id="screen-warehouse" class="screen">
       <div class="screen-center">
         <div class="card">
           <div class="card-title">Select Warehouse</div>
           <div class="card-subtitle">Choose the warehouse to sell from.</div>
-          
           <div id="warehouseList" class="warehouse-list"></div>
-          
-          <button id="warehouseContinueBtn" class="btn btn-primary btn-block btn-lg mt-md" disabled>
-            Continue to POS
-          </button>
-          
-          <button id="warehouseLogoutBtn" class="btn btn-ghost btn-block mt-sm">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            Sign out
-          </button>
+          <button id="warehouseContinueBtn" class="btn btn-primary btn-block btn-lg mt-md" disabled>Continue to POS</button>
+          <button id="warehouseLogoutBtn" class="btn btn-ghost btn-block mt-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sign out</button>
         </div>
       </div>
     </section>
 
-    <!-- Screen: POS -->
     <section id="screen-pos" class="screen">
       <div class="pos-container">
-        <!-- Left: Products -->
         <div class="pos-left">
-          <div class="pos-toolbar">
-            <div class="pos-search">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input id="productSearchInput" type="text" placeholder="Search products...">
-            </div>
-          </div>
-          
+          <div class="pos-toolbar"><div class="pos-search"><i class="fa-solid fa-magnifying-glass"></i><input id="productSearchInput" type="text" placeholder="Search products..."></div></div>
           <div id="categoryFilter" class="category-bar"></div>
-          
           <div class="products-area">
-            <div class="products-header">
-              <span class="products-title">Products</span>
-              <span class="products-count" id="productsCountLabel">0 items</span>
-            </div>
+            <div class="products-header"><span class="products-title">Products</span><span class="products-count" id="productsCountLabel">0 items</span></div>
             <div id="productsGrid" class="products-grid"></div>
           </div>
         </div>
-        
-        <!-- Right: Cart -->
         <div class="pos-right" id="cartPanel">
           <div class="cart-header">
-            <div>
-              <div class="cart-title">Cart</div>
-              <div class="cart-count" id="cartItemsCountLabel">No items</div>
-            </div>
-            <button id="clearCartBtn" class="btn btn-ghost btn-sm">
-              <i class="fa-solid fa-trash"></i>
-              Clear
-            </button>
+            <div><div class="cart-title">Cart</div><div class="cart-count" id="cartItemsCountLabel">No items</div></div>
+            <button id="clearCartBtn" class="btn btn-ghost btn-sm"><i class="fa-solid fa-trash"></i>Clear</button>
           </div>
-          
-          <div id="cartItemsContainer" class="cart-items">
-            <div class="cart-empty" id="cartEmptyMessage">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <p>Cart is empty</p>
-              <p style="font-size:12px;">Tap a product to add it</p>
-            </div>
-          </div>
-          
+          <div id="cartItemsContainer" class="cart-items"><div class="cart-empty" id="cartEmptyMessage"><i class="fa-solid fa-cart-shopping"></i><p>Cart is empty</p><p style="font-size:12px;">Tap a product to add it</p></div></div>
           <div class="cart-summary">
-            <div class="summary-row">
-              <span>Subtotal</span>
-              <span id="cartSubtotalLabel">0.00 EGP</span>
-            </div>
-            <div class="summary-row">
-              <span>Shipping</span>
-              <span id="cartShippingLabel">0.00 EGP</span>
-            </div>
-            <div class="summary-total">
-              <span>Total</span>
-              <span id="cartTotalLabel">0.00 EGP</span>
-            </div>
+            <div class="summary-row"><span>Subtotal</span><span id="cartSubtotalLabel">0.00 EGP</span></div>
+            <div class="summary-row"><span>Shipping</span><span id="cartShippingLabel">0.00 EGP</span></div>
+            <div class="summary-total"><span>Total</span><span id="cartTotalLabel">0.00 EGP</span></div>
           </div>
-          
           <div class="cart-actions">
-            <button id="mobileCloseCart" class="btn btn-ghost" style="display:none;">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-            <button id="checkoutBtn" class="btn btn-primary btn-lg" style="flex:2;">
-              <i class="fa-solid fa-bag-shopping"></i>
-              Checkout
-            </button>
+            <button id="mobileCloseCart" class="btn btn-ghost" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+            <button id="checkoutBtn" class="btn btn-primary btn-lg" style="flex:2;"><i class="fa-solid fa-bag-shopping"></i>Checkout</button>
           </div>
         </div>
       </div>
-      
-      <!-- Mobile Cart Toggle -->
-      <button id="mobileCartToggle" class="mobile-cart-toggle">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span class="cart-badge" id="mobileCartBadge">0</span>
-      </button>
+      <button id="mobileCartToggle" class="mobile-cart-toggle"><i class="fa-solid fa-cart-shopping"></i><span class="cart-badge" id="mobileCartBadge">0</span></button>
     </section>
 
-    <!-- Screen: Checkout -->
     <section id="screen-checkout" class="screen">
       <div class="checkout-container">
-        <div class="checkout-header">
-          <button id="backToPosBtn" class="btn btn-ghost">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back
-          </button>
-          <div class="checkout-title">Complete Order</div>
-        </div>
-        
+        <div class="checkout-header"><button id="backToPosBtn" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i>Back</button><div class="checkout-title">Complete Order</div></div>
         <div class="checkout-steps">
-          <div class="step active" id="step1" data-step="1">
-            <div class="step-number">1</div>
-            <div class="step-label">Customer</div>
-          </div>
+          <div class="step active" id="step1" data-step="1"><div class="step-number">1</div><div class="step-label">Customer</div></div>
           <div class="step-line"></div>
-          <div class="step" id="step2" data-step="2">
-            <div class="step-number">2</div>
-            <div class="step-label">Delivery</div>
-          </div>
+          <div class="step" id="step2" data-step="2"><div class="step-number">2</div><div class="step-label">Delivery</div></div>
           <div class="step-line"></div>
-          <div class="step" id="step3" data-step="3">
-            <div class="step-number">3</div>
-            <div class="step-label">Payment</div>
-          </div>
+          <div class="step" id="step3" data-step="3"><div class="step-number">3</div><div class="step-label">Payment</div></div>
         </div>
-        
         <div class="checkout-body">
           <div class="checkout-main">
-            <!-- Step 1: Customer -->
             <div class="checkout-card" id="customerSection">
-              <h3 class="section-title">
-                <i class="fa-solid fa-user"></i>
-                Select Customer
-              </h3>
-              
-              <div class="form-group">
-                <input type="text" id="customerSearchInput" class="form-control" placeholder="Search by name, phone, or email...">
-              </div>
-              
+              <h3 class="section-title"><i class="fa-solid fa-user"></i>Select Customer</h3>
+              <div class="form-group"><input type="text" id="customerSearchInput" class="form-control" placeholder="Search by name, phone, or email..."></div>
               <div id="customerResults" class="search-results hidden"></div>
-              
-              <div id="selectedCustomerInfo" class="selected-badge hidden">
-                <i class="fa-solid fa-circle-check"></i>
-                <span id="selectedCustomerLabel"></span>
-              </div>
-              
-              <button class="btn btn-ghost btn-block" id="useGuestBtn">
-                <i class="fa-solid fa-user-slash"></i>
-                Continue as Guest
-              </button>
+              <div id="selectedCustomerInfo" class="selected-badge hidden"><i class="fa-solid fa-circle-check"></i><span id="selectedCustomerLabel"></span></div>
+              <button class="btn btn-ghost btn-block" id="useGuestBtn"><i class="fa-solid fa-user-slash"></i>Continue as Guest</button>
             </div>
-
             <div id="posCustomerSection" class="checkout-card hidden" style="margin-top: 16px;">
-              <h3 class="section-title">
-                <i class="fa-solid fa-user"></i>
-                Customer Information
-              </h3>
-              
-              <div class="form-group">
-                <label class="form-label">Customer Name *</label>
-                <input id="posCustomerNameInput" type="text" class="form-control" placeholder="Enter customer name">
-              </div>
-              
-              <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label">Phone Number *</label>
-                <input id="posCustomerPhoneInput" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX">
-                <small style="font-size: 11px; color: var(--gray-500); margin-top: 4px; display: block;">
-                  Required to send invoice via WhatsApp
-                </small>
-              </div>
+              <h3 class="section-title"><i class="fa-solid fa-user"></i>Customer Information</h3>
+              <div class="form-group"><label class="form-label">Customer Name *</label><input id="posCustomerNameInput" type="text" class="form-control" placeholder="Enter customer name"></div>
+              <div class="form-group" style="margin-bottom: 0;"><label class="form-label">Phone Number *</label><input id="posCustomerPhoneInput" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX"><small style="font-size: 11px; color: var(--gray-500); margin-top: 4px; display: block;">Required to send invoice via WhatsApp</small></div>
             </div>
-
             <div class="checkout-card hidden" id="guestDetailsSection">
-              <h3 class="section-title">
-                <i class="fa-solid fa-id-card"></i>
-                Customer Details
-              </h3>
-              
-              <div class="form-group">
-                <label class="form-label">Customer Name *</label>
-                <input id="guestNameInput" type="text" class="form-control" placeholder="Customer full name">
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Phone *</label>
-                <input id="guestPhoneInput" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX">
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Zone *</label>
-                <select id="guestZoneSelect" class="select-control">
-                  <option value="">Select zone</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Email (optional)</label>
-                <input id="guestEmailInput" type="email" class="form-control" placeholder="customer@example.com">
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Location URL (optional)</label>
-                <input id="guestLocationUrlInput" type="url" class="form-control" placeholder="https://www.google.com/maps?...">
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Address *</label>
-                <textarea id="guestAddressInput" class="form-control" rows="2" placeholder="Street, building, floor..."></textarea>
-              </div>
-              
-              <div class="form-group">
-                <label class="form-label">Notes (optional)</label>
-                <textarea id="guestNotesInput" class="form-control" rows="2" placeholder="Any special notes..."></textarea>
-              </div>
+              <h3 class="section-title"><i class="fa-solid fa-id-card"></i>Customer Details</h3>
+              <div class="form-group"><label class="form-label">Customer Name *</label><input id="guestNameInput" type="text" class="form-control" placeholder="Customer full name"></div>
+              <div class="form-group"><label class="form-label">Phone *</label><input id="guestPhoneInput" type="tel" class="form-control" placeholder="+20 1XXXXXXXXX"></div>
+              <div class="form-group"><label class="form-label">Zone *</label><select id="guestZoneSelect" class="select-control"><option value="">Select zone</option></select></div>
+              <div class="form-group"><label class="form-label">Email (optional)</label><input id="guestEmailInput" type="email" class="form-control" placeholder="customer@example.com"></div>
+              <div class="form-group"><label class="form-label">Location URL (optional)</label><input id="guestLocationUrlInput" type="url" class="form-control" placeholder="https://www.google.com/maps?..."></div>
+              <div class="form-group"><label class="form-label">Address *</label><textarea id="guestAddressInput" class="form-control" rows="2" placeholder="Street, building, floor..."></textarea></div>
+              <div class="form-group"><label class="form-label">Notes (optional)</label><textarea id="guestNotesInput" class="form-control" rows="2" placeholder="Any special notes..."></textarea></div>
             </div>
-
-            <!-- ✅ Navigation Buttons for Step 1 -->
-            <div class="step-nav-buttons">
-              <button class="btn btn-primary btn-block" id="nextToStep2">
-                Continue to Delivery
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-            
-            <!-- Step 2: Delivery -->
+            <div class="step-nav-buttons"><button class="btn btn-primary btn-block" id="nextToStep2">Continue to Delivery<i class="fa-solid fa-arrow-right"></i></button></div>
             <div class="checkout-card hidden" id="deliverySection">
-              <h3 class="section-title">
-                <i class="fa-solid fa-truck"></i>
-                Order Type
-              </h3>
-              
+              <h3 class="section-title"><i class="fa-solid fa-truck"></i>Order Type</h3>
               <div class="radio-group" id="orderTypeGroup">
-                <div class="radio-chip" data-type="pos">
-                  <i class="fa-solid fa-shop"></i>
-                  POS / Pickup
-                </div>
-                <div class="radio-chip" data-type="delivery">
-                  <i class="fa-solid fa-truck-fast"></i>
-                  Delivery
-                </div>
+                <div class="radio-chip" data-type="pos"><i class="fa-solid fa-shop"></i>POS / Pickup</div>
+                <div class="radio-chip" data-type="delivery"><i class="fa-solid fa-truck-fast"></i>Delivery</div>
               </div>
-              
               <div id="deliveryAddressSection" class="hidden mt-md">
                 <h4 style="font-size:13px;font-weight:600;margin-bottom:12px;">Delivery Address</h4>
-                
                 <div id="addressesContainer" class="address-list"></div>
-                
-                <div id="noAddressesMessage" class="empty-state hidden">
-                  <i class="fa-solid fa-map-location-dot"></i>
-                  <p>No saved addresses</p>
-                </div>
-                
-                <button class="btn btn-outline btn-sm" id="addNewAddressBtn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add New Address
-                </button>
-                
+                <div id="noAddressesMessage" class="empty-state hidden"><i class="fa-solid fa-map-location-dot"></i><p>No saved addresses</p></div>
+                <button class="btn btn-outline btn-sm" id="addNewAddressBtn"><i class="fa-solid fa-plus"></i>Add New Address</button>
                 <div id="deliveryScheduleSection" class="hidden mt-md">
                   <h4 style="font-size:13px;font-weight:600;margin-bottom:12px;">Delivery Schedule</h4>
-                  
                   <div class="schedule-grid">
-                    <div class="form-group" style="margin-bottom:0;">
-                      <label class="form-label">Date</label>
-                      <select id="deliveryDateSelect" class="select-control">
-                        <option value="">Select date</option>
-                      </select>
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom:0;">
-                      <label class="form-label">Time</label>
-                      <select id="deliveryTimeSelect" class="select-control">
-                        <option value="">Select time</option>
-                      </select>
-                    </div>
+                    <div class="form-group" style="margin-bottom:0;"><label class="form-label">Date</label><select id="deliveryDateSelect" class="select-control"><option value="">Select date</option></select></div>
+                    <div class="form-group" style="margin-bottom:0;"><label class="form-label">Time</label><select id="deliveryTimeSelect" class="select-control"><option value="">Select time</option></select></div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- ✅ Navigation Buttons for Step 2 -->
-            <div class="step-nav-buttons hidden" id="step2NavButtons">
-              <button class="btn btn-outline" id="backToStep1">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back to Customer
-              </button>
-              <button class="btn btn-primary" style="flex:1;" id="nextToStep3">
-                Continue to Payment
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-            
-            <!-- Step 3: Payment -->
+            <div class="step-nav-buttons hidden" id="step2NavButtons"><button class="btn btn-outline" id="backToStep1"><i class="fa-solid fa-arrow-left"></i>Back to Customer</button><button class="btn btn-primary" style="flex:1;" id="nextToStep3">Continue to Payment<i class="fa-solid fa-arrow-right"></i></button></div>
             <div class="checkout-card hidden" id="paymentSection">
-              <h3 class="section-title">
-                <i class="fa-solid fa-credit-card"></i>
-                Payment Method
-              </h3>
-              
-              <div class="form-group" style="margin-bottom:0;">
-                <select id="paymentMethodSelect" class="select-control">
-                  <option value="cod">Cash on Delivery</option>
-                  <option value="card">Credit Card</option>
-                  <option value="bank">Bank Transfer</option>
-                </select>
-              </div>
+              <h3 class="section-title"><i class="fa-solid fa-credit-card"></i>Payment Method</h3>
+              <div class="form-group" style="margin-bottom:0;"><select id="paymentMethodSelect" class="select-control"><option value="cod">Cash on Delivery</option><option value="card">Credit Card</option><option value="bank">Bank Transfer</option></select></div>
             </div>
-
-            <!-- ✅ Navigation Buttons for Step 3 -->
-            <div class="step-nav-buttons hidden" id="step3NavButtons">
-              <button class="btn btn-outline" id="backToStep2">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back to Delivery
-              </button>
-            </div>
+            <div class="step-nav-buttons hidden" id="step3NavButtons"><button class="btn btn-outline" id="backToStep2"><i class="fa-solid fa-arrow-left"></i>Back to Delivery</button></div>
           </div>
-          
-          <!-- Sidebar: Order Summary -->
           <div class="checkout-sidebar">
             <div class="summary-card">
               <h3 class="section-title">Order Summary</h3>
-              
               <div class="summary-items" id="checkoutCartItems"></div>
-              
               <div class="summary-totals">
-                <div class="summary-row">
-                  <span>Subtotal</span>
-                  <span id="summarySubtotalLabel">0 EGP</span>
-                </div>
-                <div class="summary-row" id="summaryDiscountRow">
-                  <span>Discount</span>
-                  <span id="summaryDiscountLabel" class="text-success">-0 EGP</span>
-                </div>
-                <div class="summary-row">
-                  <span>Shipping</span>
-                  <span id="summaryShippingLabel">Free</span>
-                </div>
-                <div class="summary-row total">
-                  <span>Total</span>
-                  <span id="summaryTotalLabel">0 EGP</span>
-                </div>
+                <div class="summary-row"><span>Subtotal</span><span id="summarySubtotalLabel">0 EGP</span></div>
+                <div class="summary-row" id="summaryDiscountRow"><span>Discount</span><span id="summaryDiscountLabel" class="text-success">-0 EGP</span></div>
+                <div class="summary-row"><span>Shipping</span><span id="summaryShippingLabel">Free</span></div>
+                <div class="summary-row total"><span>Total</span><span id="summaryTotalLabel">0 EGP</span></div>
               </div>
-              
               <div id="couponSection" class="coupon-section"></div>
-              
-              <button class="btn btn-success btn-block btn-lg" id="placeOrderBtn">
-                <span id="placeOrderSpinner" class="spinner hidden"></span>
-                <i class="fa-solid fa-check"></i>
-                Place Order
-              </button>
+              <button class="btn btn-success btn-block btn-lg" id="placeOrderBtn"><span id="placeOrderSpinner" class="spinner hidden"></span><i class="fa-solid fa-check"></i>Place Order</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
-
-    <!-- Loading Overlay -->
-    <div id="globalLoading" class="loading-overlay hidden">
-      <div class="spinner spinner-lg" style="color:var(--primary);"></div>
-    </div>
+    <div id="globalLoading" class="loading-overlay hidden"><div class="spinner spinner-lg" style="color:var(--primary);"></div></div>
   </div>
 
-
   <div id="tf-navigation"></div>
-        
-        <!-- External Scripts -->
-    <script src="navigation.js"></script>
+  <script src="navigation.js"></script>
   <script>
-    // ==================== CONFIG ====================
-    const API_BASE = 'https://tenderfrozen.com';
-    const SHRMS_LOGIN_ENDPOINT = '/wp-json/shrms/v1/auth/login';
-    const FF_API_BASE = '/wp-json/ff/v1';
-    const SCL_API_BASE = '/wp-json/scl/v1';
-    const WC_API_BASE = '/wp-json/wc/v3';
-
-    const STORAGE_KEYS = {
-      AUTH: 'pos_auth_data',
-      WAREHOUSE: 'pos_warehouse',
-      SETTINGS: 'pos_settings'
-    };
-
-    // ==================== STATE ====================
-    const state = {
-      token: null,
-      employee: null,
-      warehouses: [],
-      selectedWarehouse: null,
-      products: [],
-      wcProducts: {},
-      categories: [],
-      selectedCategory: 'all',
-      searchTerm: '',
-      cart: [],
-      selectedCustomer: null,
-      customerAddresses: [],
-      selectedAddress: null,
-      orderType: null,
-      paymentMethod: 'cod',
-      shippingCost: 0,
-      deliveryDates: [],
-      deliveryTimes: [],
-      deliveryDate: '',
-      deliveryTime: '',
-      appliedCoupon: null,
-      discount: 0,
-      defaultOrderStatus: 'on-hold',
-      orderStatuses: [],
-      paymentGateways: [],
-      currentStep: 1 // ✅ إضافة current step
-    };
-
-    // ==================== HELPERS ====================
-    const $ = id => document.getElementById(id);
-    const formatMoney = n => parseFloat(n || 0).toFixed(2);
-
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      $(id).classList.add('active');
-    }
-
-    function setGlobalLoading(show) {
-      $('globalLoading').classList.toggle('hidden', !show);
-    }
-
-    function showToast(message, type = 'success') {
-      const container = $('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.innerHTML = `
-        <i class="fa-solid fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'circle-xmark' : 'triangle-exclamation'}"></i>
-        <span class="toast-message">${message}</span>
-        <button class="toast-close" onclick="this.parentElement.remove()">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      `;
-      container.appendChild(toast);
-      setTimeout(() => toast.remove(), 4000);
-    }
-
-    function authHeaders() {
-      return state.token ? { 'Authorization': 'Bearer ' + state.token } : {};
-    }
-
-    async function apiFetch(url, options = {}) {
-      const res = await fetch(url, {
-        ...options,
-        headers: {
-          'Content-Type': 'application/json',
-          ...(options.headers || {}),
-          ...authHeaders()
-        }
-      });
-      
-      if (!res.ok) {
-        let msg = 'HTTP ' + res.status;
-        try {
-          const data = await res.json();
-          if (data && data.message) msg = data.message;
-        } catch (e) {}
-        throw new Error(msg);
-      }
-      
-      return res.json();
-    }
-
-    // ✅ Step Navigation Functions
-    function goToStep(stepNumber) {
-      state.currentStep = stepNumber;
-      
-      // Update step indicators
-      document.querySelectorAll('.step').forEach((step, index) => {
-        const num = index + 1;
-        step.classList.remove('active', 'completed');
-        
-        if (num < stepNumber) {
-          step.classList.add('completed');
-        } else if (num === stepNumber) {
-          step.classList.add('active');
-        }
-      });
-      
-      // Show/hide sections
-      $('customerSection').classList.toggle('hidden', stepNumber !== 1);
-      $('posCustomerSection').classList.toggle('hidden', stepNumber !== 1 || !state.selectedCustomer || state.selectedCustomer.id !== 0 || state.orderType !== 'pos');
-      $('guestDetailsSection').classList.toggle('hidden', stepNumber !== 1 || !state.selectedCustomer || state.selectedCustomer.id !== 0 || state.orderType !== 'delivery');
-      $('deliverySection').classList.toggle('hidden', stepNumber !== 2);
-      $('paymentSection').classList.toggle('hidden', stepNumber !== 3);
-      
-      // Show/hide nav buttons
-      document.querySelector('.step-nav-buttons:not(.hidden)')?.classList.add('hidden');
-      if (stepNumber === 1) {
-        document.querySelector('#nextToStep2').parentElement.classList.remove('hidden');
-      } else if (stepNumber === 2) {
-        $('step2NavButtons').classList.remove('hidden');
-      } else if (stepNumber === 3) {
-        $('step3NavButtons').classList.remove('hidden');
-      }
-      
-      // Scroll to top
-      document.querySelector('.checkout-main').scrollTop = 0;
-    }
-
-    function validateStep1() {
-      if (!state.selectedCustomer) {
-        showToast('Please select a customer or continue as guest', 'warning');
-        return false;
-      }
-      
-      const isGuest = state.selectedCustomer.id === 0;
-      
-      if (isGuest && state.orderType === 'pos') {
-        const posName = $('posCustomerNameInput').value.trim();
-        const posPhone = $('posCustomerPhoneInput').value.trim();
-        
-        if (!posName || !posPhone) {
-          showToast('Please enter customer name and phone', 'warning');
-          return false;
-        }
-      }
-      
-      return true;
-    }
-
-    function validateStep2() {
-      if (!state.orderType) {
-        showToast('Please select order type', 'warning');
-        return false;
-      }
-      
-      if (state.orderType === 'delivery') {
-        const isGuest = state.selectedCustomer && state.selectedCustomer.id === 0;
-        
-        if (isGuest) {
-          const guestZone = $('guestZoneSelect').value;
-          const deliveryDate = $('deliveryDateSelect').value;
-          const deliveryTime = $('deliveryTimeSelect').value;
-          
-          if (!guestZone || !deliveryDate || !deliveryTime) {
-            showToast('Please complete all delivery details', 'warning');
-            return false;
-          }
-        } else {
-          if (!state.selectedAddress) {
-            showToast('Please select delivery address', 'warning');
-            return false;
-          }
-          
-          const deliveryDate = $('deliveryDateSelect').value;
-          const deliveryTime = $('deliveryTimeSelect').value;
-          
-          if (!deliveryDate || !deliveryTime) {
-            showToast('Please select delivery date and time', 'warning');
-            return false;
-          }
-        }
-      }
-      
-      return true;
-    }
-
-    // Continue from previous JavaScript code...
-    // [Rest of the code remains exactly the same but add event listeners for step navigation]
-
-    // ✅ Add to initEventListeners() function:
-    function initEventListeners() {
-      // ... existing listeners ...
-      
-      // Step navigation
-      $('nextToStep2').onclick = () => {
-        if (validateStep1()) goToStep(2);
-      };
-      
-      $('backToStep1').onclick = () => goToStep(1);
-      
-      $('nextToStep3').onclick = () => {
-        if (validateStep2()) goToStep(3);
-      };
-      
-      $('backToStep2').onclick = () => goToStep(2);
-      
-      // Click on step numbers to navigate
-      document.querySelectorAll('.step').forEach(step => {
-        step.onclick = () => {
-          const stepNum = parseInt(step.dataset.step);
-          if (stepNum < state.currentStep) {
-            goToStep(stepNum);
-          } else if (stepNum === state.currentStep + 1) {
-            if (state.currentStep === 1 && validateStep1()) {
-              goToStep(2);
-            } else if (state.currentStep === 2 && validateStep2()) {
-              goToStep(3);
-            }
-          }
-        };
-      });
-    }
-
-    // Note: The rest of the JavaScript code remains exactly the same
-    // I've only added the step navigation functionality
+    const API_BASE='https://tenderfrozen.com',SHRMS_LOGIN_ENDPOINT='/wp-json/shrms/v1/auth/login',FF_API_BASE='/wp-json/ff/v1',SCL_API_BASE='/wp-json/scl/v1',WC_API_BASE='/wp-json/wc/v3',STORAGE_KEYS={AUTH:'pos_auth_data',WAREHOUSE:'pos_warehouse',SETTINGS:'pos_settings'},state={token:null,employee:null,warehouses:[],selectedWarehouse:null,products:[],wcProducts:{},categories:[],selectedCategory:'all',searchTerm:'',cart:[],selectedCustomer:null,customerAddresses:[],selectedAddress:null,orderType:null,paymentMethod:'cod',shippingCost:0,deliveryDates:[],deliveryTimes:[],deliveryDate:'',deliveryTime:'',appliedCoupon:null,discount:0,defaultOrderStatus:'on-hold',orderStatuses:[],paymentGateways:[],currentStep:1},$=id=>document.getElementById(id),formatMoney=n=>parseFloat(n||0).toFixed(2);
+    function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+    function setGlobalLoading(show){$('globalLoading').classList.toggle('hidden',!show)}
+    function showToast(message,type='success'){const container=$('toastContainer'),toast=document.createElement('div');toast.className=`toast ${type}`;toast.innerHTML=`<i class="fa-solid fa-${type==='success'?'check-circle':type==='error'?'circle-xmark':'triangle-exclamation'}"></i><span class="toast-message">${message}</span><button class="toast-close" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>`;container.appendChild(toast);setTimeout(()=>toast.remove(),4000)}
+    function authHeaders(){return state.token?{'Authorization':'Bearer '+state.token}:{}}
+    async function apiFetch(url,options={}){const res=await fetch(url,{...options,headers:{'Content-Type':'application/json',...(options.headers||{}),...authHeaders()}});if(!res.ok){let msg='HTTP '+res.status;try{const data=await res.json();if(data&&data.message)msg=data.message}catch(e){}throw new Error(msg)}return res.json()}
+    function goToStep(stepNumber){state.currentStep=stepNumber;document.querySelectorAll('.step').forEach((step,index)=>{const num=index+1;step.classList.remove('active','completed');if(num<stepNumber)step.classList.add('completed');else if(num===stepNumber)step.classList.add('active')});$('customerSection').classList.toggle('hidden',stepNumber!==1);$('posCustomerSection').classList.toggle('hidden',stepNumber!==1||!state.selectedCustomer||state.selectedCustomer.id!==0||state.orderType!=='pos');$('guestDetailsSection').classList.toggle('hidden',stepNumber!==1||!state.selectedCustomer||state.selectedCustomer.id!==0||state.orderType!=='delivery');$('deliverySection').classList.toggle('hidden',stepNumber!==2);$('paymentSection').classList.toggle('hidden',stepNumber!==3);document.querySelector('.step-nav-buttons:not(.hidden)')?.classList.add('hidden');if(stepNumber===1)document.querySelector('#nextToStep2').parentElement.classList.remove('hidden');else if(stepNumber===2)$('step2NavButtons').classList.remove('hidden');else if(stepNumber===3)$('step3NavButtons').classList.remove('hidden');document.querySelector('.checkout-main').scrollTop=0}
+    function validateStep1(){if(!state.selectedCustomer){showToast('Please select a customer or continue as guest','warning');return false}const isGuest=state.selectedCustomer.id===0;if(isGuest&&state.orderType==='pos'){const posName=$('posCustomerNameInput').value.trim(),posPhone=$('posCustomerPhoneInput').value.trim();if(!posName||!posPhone){showToast('Please enter customer name and phone','warning');return false}}return true}
+    function validateStep2(){if(!state.orderType){showToast('Please select order type','warning');return false}if(state.orderType==='delivery'){const isGuest=state.selectedCustomer&&state.selectedCustomer.id===0;if(isGuest){const guestZone=$('guestZoneSelect').value,deliveryDate=$('deliveryDateSelect').value,deliveryTime=$('deliveryTimeSelect').value;if(!guestZone||!deliveryDate||!deliveryTime){showToast('Please complete all delivery details','warning');return false}}else{if(!state.selectedAddress){showToast('Please select delivery address','warning');return false}const deliveryDate=$('deliveryDateSelect').value,deliveryTime=$('deliveryTimeSelect').value;if(!deliveryDate||!deliveryTime){showToast('Please select delivery date and time','warning');return false}}}return true}
+    function initEventListeners(){$('nextToStep2').onclick=()=>{if(validateStep1())goToStep(2)};$('backToStep1').onclick=()=>goToStep(1);$('nextToStep3').onclick=()=>{if(validateStep2())goToStep(3)};$('backToStep2').onclick=()=>goToStep(2);document.querySelectorAll('.step').forEach(step=>{step.onclick=()=>{const stepNum=parseInt(step.dataset.step);if(stepNum<state.currentStep)goToStep(stepNum);else if(stepNum===state.currentStep+1){if(state.currentStep===1&&validateStep1())goToStep(2);else if(state.currentStep===2&&validateStep2())goToStep(3)}}})}
+    window.addEventListener('DOMContentLoaded',()=>{initEventListeners();console.log('POS System loaded with interactive steps')});
   </script>
 </body>
 </html>
