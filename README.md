@@ -1,77 +1,268 @@
 # Tender Admin App
 
-تطبيق إدارة المناقصات - نظام ويب كامل لإدارة المناقصات والمخازن والحسابات.
+A complete web-based application for managing tenders, warehouses, and accounts.
 
-## 🚀 النشر التلقائي
+## 🚀 Auto-Deployment System
 
-هذا المستودع مجهز بنظام نشر تلقائي كامل. أي تحديث يتم رفعه إلى GitHub سيتم نشره تلقائيًا على السيرفر.
+This repository comes with a complete auto-deployment system. Any changes pushed to GitHub will be automatically deployed to your server.
 
-### الإعداد السريع (3 خطوات)
+### Quick Setup (3 Steps)
 
-**1. على السيرفر:**
+**1. On Your Server:**
 ```bash
 cd /var/www/html
 git clone https://github.com/abdulrahmanroston/tender-admin-app.git
 cd tender-admin-app
-chmod +x deploy.sh
+chmod +x setup.sh && ./setup.sh
+```
+
+The setup script will automatically:
+- Set correct file permissions
+- Configure Git
+- Create necessary directories
+- Detect server information
+- Show webhook instructions
+
+**2. On GitHub:**
+- Go to [Settings → Webhooks](https://github.com/abdulrahmanroston/tender-admin-app/settings/hooks)
+- Click "Add webhook"
+- Configure:
+  - **Payload URL**: `https://your-domain.com/tender-admin-app/deploy.php`
+  - **Content type**: `application/json`
+  - **Secret**: Leave empty
+  - **Events**: Just the push event ✓
+- Click "Add webhook"
+
+**3. Test It:**
+```bash
+echo "test" >> test.txt
+git add test.txt
+git commit -m "Test auto-deployment"
+git push
+```
+
+Check deployment log on server:
+```bash
+tail -f deploy.log
+```
+
+### Documentation
+
+- [Complete Deployment Guide](DEPLOYMENT.md) - Full setup instructions
+- [Quick Start Guide](QUICK-START.md) - Step-by-step for beginners
+
+## 📋 Application Files
+
+- `index.html` - Main dashboard
+- `pos.html` - Point of Sale
+- `warehouses.html` - Warehouse management
+- `acc.html` - Accounts management
+- `navigation.js` - Navigation system
+- `navigation.css` - Navigation styles
+- `manifest.json` - Progressive Web App config
+- `sww.js` - Service Worker
+- `icons/` - Application icons
+
+## 🔧 Deployment System Files
+
+- `deploy.php` - Webhook handler (receives GitHub notifications)
+- `deploy.sh` - Auto-deployment script (executes git pull)
+- `deploy-manual.sh` - Manual deployment with confirmation
+- `setup.sh` - Automatic setup script
+- `check-status.sh` - System status checker
+- `deploy.log` - Deployment logs
+- `.deploy_backups/` - Automatic backups directory
+- `.htaccess` - Security protection
+
+## ✨ Features
+
+✅ **Zero-Configuration Deployment** - Works immediately after clone  
+✅ **Automatic Backups** - Creates backup before each deployment  
+✅ **Automatic Rollback** - Restores from backup if deployment fails  
+✅ **Complete Logging** - Tracks all deployment operations  
+✅ **Security Protection** - .htaccess protects sensitive files  
+✅ **Multi-Server Support** - Deploy to multiple servers simultaneously  
+✅ **Status Monitoring** - Check system health anytime  
+
+## 🛠️ Available Commands
+
+Run these commands on your server:
+
+```bash
+# One-time setup
+./setup.sh
+
+# Check system status
+./check-status.sh
+
+# Manual deployment
+./deploy-manual.sh
+
+# View deployment logs
+tail -f deploy.log
+
+# View last 50 log entries
+tail -50 deploy.log
+
+# Search for errors
+grep ERROR deploy.log
+
+# List backups
+ls -lh .deploy_backups/
+
+# Restore from backup
+tar -xzf .deploy_backups/backup_YYYYMMDD_HHMMSS.tar.gz
+```
+
+## 🔍 How It Works
+
+```
+┌──────────┐         ┌──────────┐         ┌──────────┐
+│  GitHub  │ ──────> │ Webhook  │ ──────> │  Server  │
+│   Push   │  POST   │deploy.php│  exec   │deploy.sh │
+└──────────┘         └──────────┘         └──────────┘
+                           │                     │
+                           ▼                     ▼
+                     Validates          Creates Backup
+                     Request            Pulls Changes
+                                       Updates Files
+```
+
+1. You push code to GitHub
+2. GitHub sends webhook notification to `deploy.php`
+3. `deploy.php` validates the request and triggers `deploy.sh`
+4. `deploy.sh` creates a backup and pulls latest changes
+5. Your website updates automatically!
+
+## 🌐 Deploy to Multiple Servers
+
+To deploy to multiple servers:
+
+1. Clone repository on each server
+2. Run `./setup.sh` on each server
+3. Add a separate webhook for each server in GitHub
+
+GitHub will notify all servers simultaneously on every push!
+
+## 🔒 Security Features
+
+- ✅ **Request Validation** - Verifies requests come from GitHub
+- ✅ **Automatic Backups** - Safety net for every deployment
+- ✅ **File Protection** - .htaccess prevents direct access to sensitive files
+- ✅ **Branch Control** - Only `main` branch triggers deployment
+- ✅ **Complete Logging** - All operations are logged
+
+## 📊 Monitoring
+
+### Check Deployment Status
+
+```bash
+./check-status.sh
+```
+
+This will show:
+- File permissions status
+- Git repository status
+- Backup count
+- Recent deployments
+- System information
+
+### View Live Logs
+
+```bash
+tail -f deploy.log
+```
+
+### Check Webhook Deliveries
+
+Go to GitHub: Settings → Webhooks → [Your webhook] → Recent Deliveries
+
+You should see green checkmarks ✓ for successful deployments.
+
+## 🆘 Troubleshooting
+
+### Issue: Files Not Updating
+
+```bash
+# Check git status
+git status
+git log -1
+
+# Check deployment log
+tail -20 deploy.log
+
+# Try manual deployment
+./deploy-manual.sh
+```
+
+### Issue: Permission Denied
+
+```bash
+# Fix permissions
+sudo chown -R www-data:www-data /var/www/html/tender-admin-app
+chmod +x deploy.sh setup.sh deploy-manual.sh check-status.sh
 chmod 666 deploy.log
 chmod 777 .deploy_backups
 ```
 
-**2. في GitHub:**
-- اذهب إلى [Settings → Webhooks](https://github.com/abdulrahmanroston/tender-admin-app/settings/hooks)
-- أضف webhook جديد:
-  - Payload URL: `https://your-domain.com/tender-admin-app/deploy.php`
-  - Content type: `application/json`
-  - Secret: اتركه فارغًا
-  - Events: Just the push event
+### Issue: Webhook Not Working
 
-**3. اختبار:**
+1. Check Recent Deliveries in GitHub webhook settings
+2. Verify payload URL is correct and accessible
+3. Test manually:
 ```bash
-echo "test" >> test.txt
-git add test.txt
-git commit -m "Test deployment"
-git push
+curl -X POST https://your-domain.com/tender-admin-app/deploy.php \
+  -H "Content-Type: application/json" \
+  -d '{"ref":"refs/heads/main"}'
 ```
 
-### للمزيد من التفاصيل
+### Issue: Git Pull Failed
 
-اقرأ [دليل النشر الكامل](DEPLOYMENT.md)
+```bash
+# Reset to clean state
+git reset --hard origin/main
+git pull origin main
+```
 
-## 📋 الملفات
+## 🎯 Quick Reference
 
-- `index.html` - الصفحة الرئيسية
-- `pos.html` - نقاط البيع
-- `warehouses.html` - إدارة المخازن
-- `acc.html` - الحسابات
-- `navigation.js` - نظام التنقل
-- `navigation.css` - تنسيق التنقل
-- `manifest.json` - Progressive Web App config
-- `sww.js` - Service Worker
-- `icons/` - أيقونات التطبيق
+| Task | Command |
+|------|---------|
+| Initial setup | `./setup.sh` |
+| Check status | `./check-status.sh` |
+| Manual deploy | `./deploy-manual.sh` |
+| View logs | `tail -f deploy.log` |
+| List backups | `ls -lh .deploy_backups/` |
+| Fix permissions | `chmod +x *.sh` |
 
-## 🔒 ملفات النشر التلقائي
+## 📖 Full Documentation
 
-- `deploy.php` - معالج Webhook من GitHub
-- `deploy.sh` - سكريبت النشر التلقائي
-- `deploy.log` - سجل عمليات النشر
-- `.deploy_backups/` - النسخ الاحتياطية التلقائية
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide with advanced options
+- **[QUICK-START.md](QUICK-START.md)** - Beginner-friendly step-by-step guide
 
-## ✨ المميزات
+## 💡 Tips
 
-- ✅ نشر تلقائي عند كل push
-- ✅ نسخ احتياطية تلقائية
-- ✅ سجلات كاملة
-- ✅ استعادة تلقائية عند الفشل
-- ✅ لا يحتاج إعدادات معقدة
+- Always test deployments on a staging server first
+- Monitor logs after each deployment
+- Keep backups for rollback capability
+- Use descriptive commit messages
+- Deploy during low-traffic periods
 
-## 📞 الدعم
+## 📞 Support
 
-في حالة وجود مشاكل:
-1. تحقق من `deploy.log`
-2. راجع webhook deliveries في GitHub
-3. تأكد من صلاحيات الملفات
+If you encounter issues:
+
+1. Check `deploy.log` for error messages
+2. Review webhook deliveries in GitHub
+3. Run `./check-status.sh` for diagnostics
+4. Try manual deployment with `./deploy-manual.sh`
+5. Check web server error logs
+
+## 📄 License
+
+This project is open source and available for use.
 
 ---
 
-**المستودع**: https://github.com/abdulrahmanroston/tender-admin-app
+**Repository**: https://github.com/abdulrahmanroston/tender-admin-app  
+**Last Updated**: December 26, 2025
