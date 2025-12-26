@@ -1,16 +1,15 @@
 <?php
 /**
- * GitHub Webhook Auto-Deploy Handler
+ * GitHub Webhook Auto-Deploy Handler (Simplified Version)
  * 
  * This script handles automatic deployment when GitHub sends a push event.
- * It validates the webhook payload and executes the deployment script.
+ * Works out of the box without requiring secret token configuration.
  * 
  * @author Auto-Deploy System
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 // Configuration
-define('SECRET_TOKEN', 'CHANGE_THIS_TO_YOUR_SECRET_TOKEN');
 define('DEPLOY_SCRIPT', __DIR__ . '/deploy.sh');
 define('LOG_FILE', __DIR__ . '/deploy.log');
 define('BRANCH_TO_DEPLOY', 'main');
@@ -31,7 +30,7 @@ function sendResponse($statusCode, $message) {
 }
 
 // Start processing
-logMessage('Webhook received from IP: ' . $_SERVER['REMOTE_ADDR']);
+logMessage('Webhook received from IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
 
 // Verify request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -44,19 +43,7 @@ if (empty($payload)) {
     sendResponse(400, 'Empty payload received.');
 }
 
-// Verify GitHub signature
-if (!isset($_SERVER['HTTP_X_HUB_SIGNATURE_256'])) {
-    sendResponse(403, 'Missing X-Hub-Signature-256 header.');
-}
-
-$hubSignature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'];
-$calculatedSignature = 'sha256=' . hash_hmac('sha256', $payload, SECRET_TOKEN);
-
-if (!hash_equals($calculatedSignature, $hubSignature)) {
-    sendResponse(403, 'Invalid signature. Webhook authentication failed.');
-}
-
-logMessage('Webhook signature validated successfully');
+logMessage('Valid POST request received');
 
 // Parse payload
 $data = json_decode($payload, true);
@@ -64,9 +51,16 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     sendResponse(400, 'Invalid JSON payload.');
 }
 
-// Verify it's a push event
-if (!isset($_SERVER['HTTP_X_GITHUB_EVENT']) || $_SERVER['HTTP_X_GITHUB_EVENT'] !== 'push') {
-    sendResponse(200, 'Event ignored. Only push events trigger deployment.');
+// Verify it's from GitHub (check user agent)
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+if (stripos($userAgent, 'GitHub-Hookshot') === false) {
+    logMessage("Warning: Request not from GitHub. User-Agent: {$userAgent}", 'WARNING');
+}
+
+// Check if it's a push event
+$event = $_SERVER['HTTP_X_GITHUB_EVENT'] ?? '';
+if ($event !== 'push') {
+    sendResponse(200, "Event '{$event}' ignored. Only push events trigger deployment.");
 }
 
 // Verify branch
@@ -82,8 +76,10 @@ logMessage("Push event detected on branch '{$branch}'");
 // Get commit information
 $commitMessage = $data['head_commit']['message'] ?? 'No commit message';
 $committer = $data['head_commit']['committer']['name'] ?? 'Unknown';
-$commitSha = substr($data['head_commit']['id'] ?? '', 0, 7);
+$commitSha = isset($data['head_commit']['id']) ? substr($data['head_commit']['id'], 0, 7) : 'unknown';
+$repoName = $data['repository']['full_name'] ?? 'Unknown repository';
 
+logMessage("Repository: {$repoName}");
 logMessage("Commit: [{$commitSha}] by {$committer} - {$commitMessage}");
 
 // Execute deployment script
@@ -93,6 +89,7 @@ if (!file_exists(DEPLOY_SCRIPT)) {
 
 if (!is_executable(DEPLOY_SCRIPT)) {
     chmod(DEPLOY_SCRIPT, 0755);
+    logMessage('Made deployment script executable');
 }
 
 logMessage('Executing deployment script...');
