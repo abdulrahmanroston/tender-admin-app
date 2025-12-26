@@ -1,0 +1,26 @@
+{
+  "name": "TenderFrozenDashboard",
+  "short_name": "Frozen",
+  "start_url": "https://admin.tenderfrozen.com/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a73e8",
+  "icons": [
+    {
+      "src": "https://admin.tenderfrozen.com/icons/icon1.png",
+      "sizes": "192x192",
+      "type": "image/png" 
+    },
+    {
+      "src": "https://admin.tenderfrozen.com/icons/icon2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://admin.tenderfrozen.com/icons/icon1.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
