@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v9.0.1';
+const CACHE_VERSION = 'v10.0.0';
 
 
 self.addEventListener('install', (event) => {
