@@ -94,6 +94,13 @@ main() {
     # Create backup
     create_backup || exit 1
     
+    # Reset any local changes to tracked files (FIX: Prevents deployment blocking)
+    print_info "Resetting local changes to tracked files..."
+    git reset --hard HEAD
+    
+    # Clean untracked files (optional, commented out by default)
+    # git clean -fd
+    
     # Fetch latest changes
     print_info "Fetching latest changes from GitHub..."
     if git fetch origin "${BRANCH}"; then
@@ -103,18 +110,12 @@ main() {
         exit 1
     fi
     
-    # Check for local changes
-    if [ -n "$(git status --porcelain)" ]; then
-        print_info "Local changes detected, stashing..."
-        git stash save "Auto-stash before deployment $(date '+%Y-%m-%d %H:%M:%S')"
-    fi
-    
     # Get current commit before pull
     OLD_COMMIT=$(git rev-parse HEAD)
     
-    # Pull latest changes
+    # Pull latest changes with force reset
     print_info "Pulling latest changes..."
-    if git pull origin "${BRANCH}"; then
+    if git reset --hard "origin/${BRANCH}"; then
         NEW_COMMIT=$(git rev-parse HEAD)
         
         if [ "${OLD_COMMIT}" = "${NEW_COMMIT}" ]; then
@@ -133,7 +134,7 @@ main() {
         find "${REPO_DIR}" -type f -name "*.css" -exec chmod 644 {} \;
         find "${REPO_DIR}" -type f -name "*.js" -exec chmod 644 {} \;
         find "${REPO_DIR}" -type f -name "*.json" -exec chmod 644 {} \;
-        chmod 755 "${REPO_DIR}/deploy.sh"
+        chmod 755 "${REPO_DIR}"/*.sh 2>/dev/null || true
         
         print_success "File permissions updated"
         
@@ -143,10 +144,10 @@ main() {
         
         exit 0
     else
-        print_error "Git pull failed"
+        print_error "Git reset failed"
         print_info "Attempting to restore from backup..."
         
-        # Restore from backup if pull failed
+        # Restore from backup if reset failed
         LATEST_BACKUP=$(ls -t "${BACKUP_DIR}"/backup_*.tar.gz 2>/dev/null | head -1)
         
         if [ -n "${LATEST_BACKUP}" ]; then
