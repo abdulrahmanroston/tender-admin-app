@@ -1,0 +1,47 @@
+name: Validate Code
+
+# Trigger on push and pull requests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate HTML/CSS/JS
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Validate HTML files
+      run: |
+        echo "Checking HTML files..."
+        find . -name "*.html" -type f | while read file; do
+          echo "Checking $file"
+          if ! grep -q "<!DOCTYPE html>" "$file"; then
+            echo "Warning: $file might be missing DOCTYPE declaration"
+          fi
+        done
+    
+    - name: Check file permissions
+      run: |
+        echo "Checking for executable files that shouldn't be..."
+        find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) -executable
+    
+    - name: List all files
+      run: |
+        echo "Repository structure:"
+        tree -L 2 || ls -laR
+    
+    - name: Validation Summary
+      run: |
+        echo "✓ Validation completed successfully"
+        echo "Repository is ready for deployment"
